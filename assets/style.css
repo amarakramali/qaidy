@@ -180,6 +180,16 @@ svg { flex: none; }
 .spenden-liste .leer { border-radius: 0; }
 #spenden-mehr { margin-top: 12px; }
 
+/* ---------- Größte Spender ---------- */
+.top-spender { margin-top: 30px; }
+.top-spender .abschnitt-intro { margin-bottom: 0; }
+.titel-zeichen-gold { background: var(--ocker-hell); color: var(--ocker-text); }
+/* Große Platznummer statt Anfangsbuchstabe – 1 bis 3 wie Gold, Silber und Bronze */
+.rang { background: var(--rand-hell); color: var(--leise); }
+.rang-1 { background: #F2C46D; color: #5C3D00; }
+.rang-2 { background: #D5DBE1; color: #39414A; }
+.rang-3 { background: #E9B48E; color: #5E2E12; }
+
 /* ---------- Ausgaben ---------- */
 .beitraege { display: grid; gap: 18px; }
 .beitrag { overflow: hidden; border-radius: var(--radius); background: var(--flaeche); box-shadow: var(--schatten); }

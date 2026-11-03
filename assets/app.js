@@ -19,6 +19,8 @@
   };
   const STANDARD_SPRACHE = "ar";
   const SPENDEN_SICHTBAR = 8;
+  // So viele größte Spender stehen oben (daten.js: topSpender, 0 = ausblenden)
+  const TOP_ANZAHL = E.topSpender == null ? 5 : Math.max(0, Math.floor(Number(E.topSpender)) || 0);
 
   // So viel ist 1 US-Dollar in der jeweiligen Währung wert
   const KURSE = Object.assign({ USD: 1 }, E.kurse);
@@ -45,7 +47,8 @@
       { datum: "2026-10-12", anonym: true, betrag: 50, waehrung: "USD" },
       { datum: "2026-10-08", name: "سامي", betrag: 150, waehrung: "USD" },
       { datum: "2026-10-03", name: "Rojin", betrag: 20, waehrung: "EUR" },
-      { datum: "2026-09-28", name: "كاوا", betrag: 75000, waehrung: "IQD" }
+      { datum: "2026-09-28", name: "كاوا", betrag: 75000, waehrung: "IQD" },
+      { datum: "2026-09-20", name: "آزاد", betrag: 150, waehrung: "USD" }
     ],
     ausgaben: [
       {
@@ -257,6 +260,43 @@
     $("kurs").innerHTML = esc(t("kursHinweis") + (kursDatum ? " (" + kursDatum + ")" : "")) + "<br><bdi>" + esc(kurs) + "</bdi>";
   }
 
+  // Die größten Spender: alle Spenden einer Person zusammengezählt – anonyme zählen nicht mit
+  function renderTopSpender(d) {
+    const personen = new Map();
+    d.spenden.slice().sort(nachDatum).forEach((s) => {
+      const name = String(s.name || "").trim();
+      const betrag = betragVon(s);
+      if (s.anonym || !name || betrag <= 0) return;
+      // gleicher Name = gleiche Person, auch bei anderer Groß-/Kleinschreibung
+      const schluessel = name.toLocaleLowerCase().replace(/\s+/g, " ");
+      const person = personen.get(schluessel) || { name, usd: 0, summen: {} };
+      const waehrung = waehrungVon(s);
+      person.usd += inUSD(betrag, waehrung);
+      person.summen[waehrung] = (person.summen[waehrung] || 0) + betrag;
+      personen.set(schluessel, person);
+    });
+    const top = Array.from(personen.values()).sort((a, b) => b.usd - a.usd).slice(0, TOP_ANZAHL);
+    $("top-spender").hidden = top.length === 0;
+    $("top-liste").innerHTML = top.map(topHtml).join("");
+  }
+
+  function topHtml(person, i) {
+    const waehrungen = Object.keys(person.summen);
+    // Nur eine Währung: genauer Betrag – sonst umgerechnet in die Hauptwährung
+    const betrag = waehrungen.length === 1
+      ? geld(Math.round(person.summen[waehrungen[0]] * 100) / 100, waehrungen[0])
+      : "≈ " + geld(glatt(ausUSD(person.usd, HAUPT), HAUPT), HAUPT);
+    return '<li class="spende">' +
+      '<span class="avatar rang rang-' + (i + 1) + '" aria-hidden="true">' + esc(zahl(i + 1)) + "</span>" +
+      '<span class="spende-text">' +
+        '<span class="spende-zeile">' +
+          '<span class="spende-name"><bdi>' + esc(person.name) + "</bdi></span>" +
+          '<bdi class="spende-betrag">' + esc(betrag) + "</bdi>" +
+        "</span>" +
+      "</span>" +
+    "</li>";
+  }
+
   function renderSpenden(d) {
     const liste = d.spenden.slice().sort(nachDatum);
     const sichtbar = alleSpenden ? liste : liste.slice(0, SPENDEN_SICHTBAR);
@@ -395,6 +435,7 @@
     const d = daten();
     hinweis.hidden = !d.beispiel;
     renderKasse(d);
+    renderTopSpender(d);
     renderSpenden(d);
     renderAusgaben(d);
     renderSpendenWie(d.beispiel);

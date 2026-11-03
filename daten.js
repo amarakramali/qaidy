@@ -26,6 +26,9 @@ window.QAIDY_DATEN = {
     // Am besten ein Querformat-Foto. Leer lassen ("") = gemalte Berge statt Foto.
     titelbild: "bilder/karajal.jpg",
 
+    // So viele der größten Spender stehen oben auf der Seite. 0 = ausblenden.
+    topSpender: 5,
+
     // In dieser Währung steht der Kontostand groß oben: "USD", "IQD" oder "EUR".
     hauptwaehrung: "USD",
 
