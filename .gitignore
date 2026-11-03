@@ -1,0 +1,11 @@
+# Wird NICHT veröffentlicht:
+# Original-Foto (die Seite nutzt die verkleinerte Kopie bilder/karajal.jpg)
+Karajal Temple.png
+# Anleitung und Hochlade-Knopf nur für dich auf dem PC
+ANLEITUNG.md
+hochladen.bat
+# Einstellungen für die Vorschau auf dem PC
+.claude/
+# Windows-Hilfsdateien
+Thumbs.db
+desktop.ini

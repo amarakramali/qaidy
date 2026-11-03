@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <rect width="800" height="500" fill="#F3E6CF"/>
+  <circle cx="120" cy="100" r="40" fill="#F6C453"/>
+  <rect y="400" width="800" height="100" fill="#D9C29A"/>
+  <rect x="220" y="230" width="360" height="170" fill="#E8D3AE" stroke="#B89B6C" stroke-width="4"/>
+  <rect x="270" y="290" width="70" height="110" rx="4" fill="#8C6B43"/>
+  <rect x="400" y="280" width="120" height="70" fill="#9CC6D9" stroke="#6E8FA0" stroke-width="4"/>
+  <path d="M330 230v-14M470 230v-14" stroke="#5B5B5B" stroke-width="8"/>
+  <rect x="300" y="140" width="200" height="80" rx="14" fill="#2F7FA6"/>
+  <rect x="300" y="140" width="200" height="20" rx="10" fill="#3E95C0"/>
+  <path d="M600 170s-20 24-20 38a20 20 0 0 0 40 0c0-14-20-38-20-38z" fill="#3E95C0"/>
+  <rect x="24" y="24" width="200" height="48" rx="24" fill="#fff" opacity=".9"/>
+  <text x="124" y="57" text-anchor="middle" font-family="Segoe UI, Tahoma, Arial, sans-serif" font-size="26" font-weight="700" fill="#6B4A0C">مثال · Beispiel</text>
+</svg>
