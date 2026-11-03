@@ -256,7 +256,7 @@ svg { flex: none; }
 .betrachter-knopf:hover { background: rgba(255, 255, 255, 0.26); }
 .betrachter-zaehler { font-weight: 700; }
 
-/* ---------- Impressum / Datenschutz ---------- */
+/* ---------- Impressum ---------- */
 .rechtlich main { margin-block: 24px; }
 .rechtlich h1 { margin-top: 0; font-size: 1.6rem; }
 .rechtlich h2 { margin: 24px 0 6px; font-size: 1.15rem; }
